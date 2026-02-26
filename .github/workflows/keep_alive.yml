@@ -1,0 +1,27 @@
+name: Keep Streamlit Apps Awake
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'   # Runs every 12 hours
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping All Streamlit Apps
+        run: |
+          urls=(
+            "https://aanalytics-app-abhishek-jha-uw.streamlit.app/"
+            "https://abhishek-jha-uw-forecasting-app-bu6esr3b9qxhwgkeu6rer7.streamlit.app/"
+            "https://dynamic-pricing-elasticity-simulator-m9pycn5tudxyqrevs3spwl.streamlit.app/"
+            "https://a-b-testing-experimentation-lqmnpr27pbueqetibd5xdjk.streamlit.app/"
+            "https://customer-health-churn-early-warning-system-bvwjzcmbxnmvxgrudsv.streamlit.app/"
+            "https://guardiansql-xuah5wqluljyfhb5fe9olu.streamlit.app/"
+            "https://recommendation-system-user-based-collaborative-filtering-lmux9.streamlit.app/"
+          )
+
+          for url in "${urls[@]}"; do
+            echo "Pinging $url"
+            curl -s -o /dev/null -w "%{http_code}\n" "$url"
+          done
