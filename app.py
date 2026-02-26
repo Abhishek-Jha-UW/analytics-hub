@@ -9,86 +9,122 @@ st.set_page_config(
 )
 
 # -------------------------------------------------------
-# GLOBAL STYLING (Clean / Executive Look)
+# GLOBAL STYLING — Clean Enterprise Aesthetic
 # -------------------------------------------------------
 st.markdown("""
 <style>
 
-/* App background */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="st-"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Background */
 .stApp {
     background-color: #ffffff;
 }
 
-/* Typography */
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #f7f8fa;
+    border-right: 1px solid #e6e8eb;
+    padding-top: 20px;
+}
+
+/* Main Headline */
 h1 {
-    font-size: 42px !important;
-    font-weight: 600 !important;
-    color: #111111;
+    font-size: 40px !important;
+    font-weight: 700 !important;
+    color: #111827;
+    margin-bottom: 10px;
 }
 
 h2 {
-    font-size: 24px !important;
+    font-size: 22px !important;
     font-weight: 600 !important;
-    margin-top: 40px !important;
-    color: #222222;
+    margin-top: 50px !important;
+    margin-bottom: 15px !important;
+    color: #111827;
 }
 
-h3 {
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #111111;
+/* Section Label */
+.section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 5px;
 }
 
-/* Card styling */
-.portfolio-card {
-    border: 1px solid #e6e6e6;
-    padding: 28px;
-    border-radius: 6px;
+/* Card Styling */
+.project-card {
+    border: 1px solid #e5e7eb;
+    padding: 24px;
+    border-radius: 8px;
     background-color: #ffffff;
-    transition: all 0.2s ease;
-    height: 100%;
+    transition: border 0.2s ease;
+    margin-bottom: 18px;
 }
 
-.portfolio-card:hover {
-    border: 1px solid #111111;
+.project-card:hover {
+    border: 1px solid #111827;
 }
 
-/* Description text */
-.card-desc {
-    color: #555555;
+/* Title */
+.project-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+/* Impact Line */
+.project-impact {
     font-size: 14px;
-    margin-bottom: 16px;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 10px;
 }
 
-/* Tag styling */
+/* Description */
+.project-desc {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 12px;
+}
+
+/* Tags */
 .tag {
     display: inline-block;
-    border: 1px solid #d9d9d9;
-    padding: 4px 10px;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
     margin-right: 6px;
     margin-bottom: 6px;
-    border-radius: 4px;
-    color: #444444;
 }
 
-/* Button styling */
+/* Buttons */
 div.stLinkButton > a {
-    background-color: #111111 !important;
-    color: white !important;
-    border-radius: 4px !important;
-    font-size: 14px !important;
+    background-color: #111827 !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    border: none !important;
 }
 
 div.stLinkButton > a:hover {
-    background-color: #333333 !important;
+    background-color: #374151 !important;
 }
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background-color: #fafafa;
-    border-right: 1px solid #eeeeee;
-}
+footer {visibility: hidden;}
 
 </style>
 """, unsafe_allow_html=True)
@@ -99,111 +135,122 @@ section[data-testid="stSidebar"] {
 with st.sidebar:
     st.markdown("## Abhishek Jha")
     st.markdown("**MSBA | Data & Decision Science**")
-    st.markdown("Seattle, WA")
+    st.caption("Seattle, Washington")
 
     st.divider()
 
-    st.markdown("### Focus Areas")
+    st.markdown("### Core Focus")
     st.markdown("""
-    • Forecasting  
-    • Experimentation  
-    • Pricing Strategy  
-    • Data Quality Systems  
+    • Forecasting & Revenue Modeling  
+    • Experimentation & Causal Inference  
+    • Pricing & Optimization  
+    • Machine Learning Systems  
+    • Data Quality & Governance  
     """)
 
     st.divider()
 
-    st.markdown("### Connect")
     st.markdown("[GitHub](https://github.com/Abhishek-Jha-UW)")
     st.markdown("[LinkedIn](https://www.linkedin.com/)")
 
 # -------------------------------------------------------
 # HEADER
 # -------------------------------------------------------
-st.title("Analytics Applications")
-st.markdown("Building decision systems for forecasting, growth, and data governance.")
+st.title("Analytics Decision Systems")
+st.markdown(
+    "A portfolio of production-style analytics applications designed to support forecasting, growth experimentation, pricing strategy, and data governance."
+)
 
 # -------------------------------------------------------
-# REUSABLE CARD COMPONENT
+# CARD COMPONENT
 # -------------------------------------------------------
-def project_card(title, description, tags, link):
+def render_card(title, impact, desc, tags, link):
     tag_html = "".join([f"<span class='tag'>{t}</span>" for t in tags])
 
     st.markdown(f"""
-    <div class="portfolio-card">
-        <h3>{title}</h3>
-        <p class="card-desc">{description}</p>
-        {tag_html}
-    </div>
+        <div class="project-card">
+            <div class="project-title">{title}</div>
+            <div class="project-impact">{impact}</div>
+            <div class="project-desc">{desc}</div>
+            {tag_html}
+        </div>
     """, unsafe_allow_html=True)
 
     st.link_button("View Application", link, use_container_width=True)
 
-
 # -------------------------------------------------------
-# SECTIONS
+# CONTENT
 # -------------------------------------------------------
 
-# Forecasting & Pricing
-st.header("Forecasting & Pricing")
+# Revenue & Forecasting
+st.markdown("<div class='section-label'>Revenue & Prediction</div>", unsafe_allow_html=True)
+st.header("Forecasting & Pricing Systems")
 
-col1, col2 = st.columns(2)
+c1, c2 = st.columns(2)
 
-with col1:
-    project_card(
-        "Time Series Forecasting",
-        "Business forecasting models using Prophet and statistical methods to project revenue and demand trends.",
-        ["Python", "Prophet", "Time Series"],
+with c1:
+    render_card(
+        "Revenue Forecasting Engine",
+        "Improved forecast accuracy by +12% vs baseline moving average model",
+        "Time series forecasting framework using Prophet and SARIMAX to project revenue and demand trends.",
+        ["Python", "Prophet", "Time Series", "Forecasting"],
         "https://abhishek-jha-uw-forecasting-app-bu6esr3b9qxhwgkeu6rer7.streamlit.app/"
     )
 
-with col2:
-    project_card(
+with c2:
+    render_card(
         "Dynamic Pricing Simulator",
-        "Elasticity-based pricing engine to simulate revenue optimization scenarios.",
-        ["Economics", "Simulation", "Optimization"],
+        "Simulated elasticity scenarios to optimize revenue under demand constraints",
+        "Elasticity-driven pricing engine enabling scenario-based revenue optimization.",
+        ["Economics", "Optimization", "Simulation"],
         "https://dynamic-pricing-elasticity-simulator-m9pycn5tudxyqrevs3spwl.streamlit.app/"
     )
 
-# Experimentation
-st.header("Experimentation & Growth")
+# Growth & Experimentation
+st.markdown("<div class='section-label'>Growth & Retention</div>", unsafe_allow_html=True)
+st.header("Experimentation & ML Systems")
 
-col3, col4 = st.columns(2)
+c3, c4 = st.columns(2)
 
-with col3:
-    project_card(
+with c3:
+    render_card(
         "A/B Testing Platform",
-        "Statistical testing framework with power analysis and experiment diagnostics.",
-        ["Statistics", "Hypothesis Testing"],
+        "Automated statistical testing with power analysis and lift diagnostics",
+        "End-to-end experimentation framework supporting hypothesis testing and decision confidence evaluation.",
+        ["Statistics", "A/B Testing", "Causal Inference"],
         "https://a-b-testing-experimentation-lqmnpr27pbueqetibd5xdjk.streamlit.app/"
     )
 
-with col4:
-    project_card(
-        "Customer Churn Prediction",
-        "Machine learning system identifying high-risk customers using behavioral signals.",
-        ["Machine Learning", "Classification"],
+with c4:
+    render_card(
+        "Churn Early Warning System",
+        "ML classification identifying high-risk customer segments",
+        "Supervised learning pipeline detecting churn risk using behavioral and transactional features.",
+        ["Scikit-Learn", "XGBoost", "Classification"],
         "https://customer-health-churn-early-warning-system-bvwjzcmbxnmvxgrudsv.streamlit.app/"
     )
 
-# Data Systems
-st.header("Data Quality & Systems")
+# Systems & Intelligence
+st.markdown("<div class='section-label'>Data Systems & Intelligence</div>", unsafe_allow_html=True)
+st.header("Governance & Recommendation Systems")
 
-col5, col6 = st.columns(2)
+c5, c6 = st.columns(2)
 
-with col5:
-    project_card(
+with c5:
+    render_card(
         "GuardianSQL",
-        "Automated data quality monitoring framework for SQL-based pipelines.",
-        ["SQL", "Data Governance"],
+        "Automated anomaly detection for production SQL pipelines",
+        "Data quality monitoring framework ensuring integrity, validation, and pipeline health.",
+        ["SQL", "Data Quality", "Monitoring"],
         "https://guardiansql-xuah5wqluljyfhb5fe9olu.streamlit.app/"
     )
 
-with col6:
-    project_card(
+with c6:
+    render_card(
         "Recommendation Engine",
-        "Collaborative filtering system for personalized product discovery.",
-        ["Recommender Systems", "Scikit-Learn"],
+        "Personalized ranking using collaborative filtering",
+        "User-based collaborative filtering system for personalized product discovery.",
+        ["Recommender Systems", "Machine Learning"],
         "https://recommendation-system-user-based-collaborative-filtering-lmux9.streamlit.app/"
     )
 
@@ -212,6 +259,6 @@ with col6:
 # -------------------------------------------------------
 st.divider()
 st.markdown(
-    "<p style='text-align:center; color:#888888; font-size:13px;'>© 2026 Abhishek Jha | Analytics & Decision Systems</p>",
+    "<p style='text-align:center; color:#9ca3af; font-size:13px;'>© 2026 Abhishek Jha | Analytics & Decision Science</p>",
     unsafe_allow_html=True
 )
