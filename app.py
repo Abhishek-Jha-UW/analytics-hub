@@ -218,7 +218,7 @@ with c3:
         "Automated statistical testing with power analysis and lift diagnostics",
         "End-to-end experimentation framework supporting hypothesis testing and decision confidence evaluation.",
         ["Statistics", "A/B Testing", "Causal Inference"],
-        "https://a-b-testing-experimentation-lqmnpr27pbueqetibd5xdjk.streamlit.app/"
+        "https://a-b-testing-experimentation-lqmnpr27pbuqetibd5xdjk.streamlit.app/"
     )
 
 with c4:
@@ -227,7 +227,7 @@ with c4:
         "ML classification identifying high-risk customer segments",
         "Supervised learning pipeline detecting churn risk using behavioral and transactional features.",
         ["Scikit-Learn", "XGBoost", "Classification"],
-        "https://customer-health-churn-early-warning-system-bvwjzcmbxnmvxgrudsv.streamlit.app/"
+        "https://dynamic-pricing-elasticity-simulator-m9pycn5tudxyqrevs3spwl.streamlit.app/"
     )
 
 # Systems & Intelligence
