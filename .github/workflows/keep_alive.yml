@@ -2,26 +2,57 @@ name: Keep Streamlit Apps Awake
 
 on:
   schedule:
-    - cron: '0 */12 * * *'   # Runs every 12 hours
+    - cron: '0 */10 * * *' # Runs every 10 hours (safer than 12)
   workflow_dispatch:
 
 jobs:
-  ping:
+  wake-up:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping All Streamlit Apps
-        run: |
-          urls=(
-            "https://aanalytics-app-abhishek-jha-uw.streamlit.app/"
-            "https://abhishek-jha-uw-forecasting-app-bu6esr3b9qxhwgkeu6rer7.streamlit.app/"
-            "https://dynamic-pricing-elasticity-simulator-m9pycn5tudxyqrevs3spwl.streamlit.app/"
-            "https://a-b-testing-experimentation-lqmnpr27pbueqetibd5xdjk.streamlit.app/"
-            "https://customer-health-churn-early-warning-system-bvwjzcmbxnmvxgrudsv.streamlit.app/"
-            "https://guardiansql-xuah5wqluljyfhb5fe9olu.streamlit.app/"
-            "https://recommendation-system-user-based-collaborative-filtering-lmux9.streamlit.app/"
-          )
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-          for url in "${urls[@]}"; do
-            echo "Pinging $url"
-            curl -s -o /dev/null -w "%{http_code}\n" "$url"
-          done
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - name: Wake Up Apps
+        run: |
+          python -c "
+          import asyncio
+          from playwright.async_api import async_playwright
+
+          async def wake_apps():
+              urls = [
+                  'https://aanalytics-app-abhishek-jha-uw.streamlit.app/',
+                  'https://abhishek-jha-uw-forecasting-app-bu6esr3b9qxhwgkeu6rer7.streamlit.app/',
+                  'https://dynamic-pricing-elasticity-simulator-m9pycn5tudxyqrevs3spwl.streamlit.app/',
+                  'https://a-b-testing-experimentation-lqmnpr27pbueqetibd5xdjk.streamlit.app/',
+                  'https://customer-health-churn-early-warning-system-bvwjzcmbxnmvxgrudsv.streamlit.app/',
+                  'https://guardiansql-xuah5wqluljyfhb5fe9olu.streamlit.app/',
+                  'https://recommendation-system-user-based-collaborative-filtering-lmux9.streamlit.app/'
+                  'https://competitive-landscape-mapping-f66enxmzgca3xjuvhzozae.streamlit.app/'
+              ]
+              async with async_playwright() as p:
+                  browser = await p.chromium.launch()
+                  for url in urls:
+                      print(f'Waking up: {url}')
+                      page = await browser.new_page()
+                      try:
+                          # Wait 15 seconds for the app to initialize the WebSocket
+                          await page.goto(url, wait_until='networkidle', timeout=60000)
+                          await asyncio.sleep(15) 
+                          print(f'Success: {url} is awake.')
+                      except Exception as e:
+                          print(f'Failed to wake {url}: {e}')
+                      await page.close()
+                  await browser.close()
+
+          asyncio.run(wake_apps())
+          "
