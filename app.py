@@ -141,7 +141,8 @@ with st.sidebar:
 
     st.markdown("### Core Focus")
     st.markdown("""
-    • Forecasting & Revenue Modeling  
+    • GenAI , Agentic AI & LLMs  
+    • Forecasting & Revenue Modeling
     • Experimentation & Causal Inference  
     • Pricing & Optimization  
     • Machine Learning Systems  
