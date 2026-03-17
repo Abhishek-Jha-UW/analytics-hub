@@ -249,7 +249,7 @@ with c4:
         "ML classification identifying high-risk customer segments",
         "Supervised learning pipeline detecting churn risk using behavioral and transactional features.",
         ["Scikit-Learn", "XGBoost", "Classification"],
-        "https://customer-health-churn-early-warning-system.streamlit.app/"
+        "https://customer-health-churn-early-warning-system-bwvjzcmbxnmvxgrudsv.streamlit.app/"
     )
 
 # -------------------------------------------------------
