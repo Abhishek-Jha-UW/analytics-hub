@@ -255,9 +255,10 @@ with c4:
 # Systems & Intelligence
 # -------------------------------------------------------
 st.markdown("<div class='section-label'>Data Systems & Intelligence</div>", unsafe_allow_html=True)
-st.header("Governance & Recommendation Systems")
+st.header("Governance & Knowledge Systems")
 
-c5, c6 = st.columns(2)
+# Updated to 3 columns to accommodate the new RAG app
+c5, c6, c7 = st.columns(3)
 
 with c5:
     render_card(
@@ -275,6 +276,15 @@ with c6:
         "User-based collaborative filtering system for personalized product discovery.",
         ["Recommender Systems", "Machine Learning"],
         "https://recommendation-system-user-based-collaborative-filtering-lmux9.streamlit.app/"
+    )
+
+with c7:
+    render_card(
+        "Document Q&A Assistant",
+        "RAG-driven intelligence for automated document synthesis",
+        "Advanced retrieval-augmented generation system for querying CSV, PDF, and Word documents.",
+        ["RAG", "LLMs", "LangChain", "Vector DB"],
+        "https://rag-abhi-uw.streamlit.app/"
     )
 
 # -------------------------------------------------------
