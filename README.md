@@ -40,9 +40,7 @@ If no key is set, **Get suggestions** stays disabled; the rest of the hub works 
 
 After you deploy this hub to a new Streamlit URL, add that URL to **`wake_extra_urls`** in `data/site.json` so the scheduled workflow also keeps the hub warm.
 
-## Keep-alive workflow
 
-`.github/workflows/keep_alive.yml` runs every **10 hours** (and on demand). It executes **`scripts/wake_from_data.py`**, which loads all `url` values from `data/projects.json` plus any strings in `site.json → wake_extra_urls`.
 
 ## Archive
 
