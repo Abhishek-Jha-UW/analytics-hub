@@ -73,7 +73,7 @@
     {
       "id": "recommendation-system",
       "name": "Recommendation System",
-      "url": "https://recommendation-system-user-based-collaborative-filtering-uvhmq.streamlit.app/",
+      "url": "https://recommendation-system-user-based-collaborative-filtering-b5tvg.streamlit.app/",
       "category": "Data Systems",
       "tagline": "User-based collaborative filtering for personalization.",
       "tags": ["Recommenders", "Collaborative Filtering", "ML"],
